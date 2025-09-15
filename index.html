@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Irfan Portfolio</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Simple Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/simpleicons.css">
+    
+    <!-- DevIcons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loader -->
+    <div id="loader" class="loader">
+        <div class="loader-ring"></div>
+        <div class="loader-text">Loading...</div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <div class="brand-logo">
+                    <div class="diamond"></div>
+                </div> 
+                <span>Mohd. Irfan</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#education">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                
+                <div class="theme-toggle ms-3">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-background">
+            <div class="particles"></div>
+        </div>
+        
+        <div class="container">
+            <div class="row align-items-center hero-content-wrapper">
+                <div class="col-lg-4" data-aos="fade-right">
+                    <div class="hero-content">
+                        <div class="profile-image-container">
+                            <img src="images/profile_img.jpg" alt="Mohd. Irfan" class="profile-image">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-8" data-aos="fade-left">
+                    <div class="hero-text">
+                        <h1 class="hero-greeting">Hi 👋, I'm Mohammad Irfan</h1>
+                        <h2 class="hero-title">
+                            <span class="typing-text"></span>
+                        </h2>
+                        <p class="hero-description">
+                            I specialize in building modern, responsive, and user-friendly web interfaces. 
+                            With a passion for clean code and seamless user experiences, I turn ideas into 
+                            digital solutions that not only look great but also perform flawlessly. 
+                            Let's work together to bring your vision to life!
+                        </p>
+                        
+                        <div class="hero-buttons">
+                            <a href="mailto:mohammadirfan25092004@gmail.com" class="btn btn-primary btn-contact">Contact Me</a>
+                            <button class="btn btn-outline-primary btn-resume">Download Resume</button>
+                            <div class="social-links">
+                                <a href="https://github.com/mohdirfan2509" class="social-link" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/mohammad-irfan-638a2b308/" class="social-link" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="stat-item stat-item-1">
+                            <h3 class="stat-number" data-count="140">0</h3>
+                            <p class="stat-label">DSA Problems Solved</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="stat-item stat-item-2">
+                            <h3 class="stat-number" data-count="2">0</h3>
+                            <p class="stat-label">Completed Projects</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="stat-item stat-item-3">
+                            <h3 class="stat-number" data-count="5">0</h3>
+                            <p class="stat-label">Tech Workshops & Events Attended</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="stat-item stat-item-4">
+                            <h3 class="stat-number" data-count="1">0</h3>
+                            <p class="stat-label">Hackathons Participated</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4" data-aos="fade-right">
+                    <div class="about-image">
+                        <img src="images/profile_img.jpg" alt="About Mohammad Irfan" class="img-fluid">
+                    </div>
+                </div>
+                
+                <div class="col-lg-8" data-aos="fade-left">
+                    <div class="about-content">
+                        <h2 class="section-title">About Me</h2>
+                        <h3 class="about-subtitle">Passionate Developer and Lifelong Learner</h3>
+                        <p class="about-description">
+                            I'm a passionate developer and lifelong learner, always curious to explore the latest in technology. Currently, I'm studying at <b>PW IOI, Bengaluru</b>, enrolled in a 4-year <b>CS & AI</b> undergraduate program, while also pursuing a <b>BS in Data Science & Applications</b> from <b>IIT Madras.</b> As a frontend developer in progress, I'm building a strong foundation while learning full-stack web development to grow into a versatile engineer. I'm also an aspiring <b>AI & ML Engineer</b> and a <b>CP Enthusiast</b>, consistently sharpening my problem-solving by <b>mastering DSA.</b> With expertise in designing responsive and modern web pages, I focus on creating digital solutions that combine clean design, functionality, and seamless user experience.
+                        </p>
+                        
+                        <!-- Coding Platform Links -->
+                        <div class="coding-platforms">
+                            <a href="https://leetcode.com/u/mohd_Irfan2004/" class="platform-link" title="LeetCode" target="_blank">
+                                <div class="platform-logo leetcode-logo"></div>
+                                <span>LeetCode</span>
+                            </a>
+                            <a href="https://codeforces.com/profile/mohd_Irfan2004" class="platform-link" title="Codeforces" target="_blank">
+                                <div class="platform-logo codeforces-logo"></div>
+                                <span>Codeforces</span>
+                            </a>
+                            <a href="https://www.codechef.com/users/mohd_irfan2004" class="platform-link" title="CodeChef" target="_blank">
+                                <div class="platform-logo codechef-logo"></div>
+                                <span>CodeChef</span>
+                            </a>
+                            <a href="https://www.geeksforgeeks.org/user/mohammadirf7byi/" class="platform-link" title="GeeksforGeeks" target="_blank">
+                                <div class="platform-logo gfg-logo"></div>
+                                <span>GfG</span>
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="tools-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center" data-aos="fade-up">
+                    <h2 class="section-title">Tools & Technologies</h2>
+                    <p class="section-subtitle">
+                        I have expertise in a wide range of tools and technologies, including:
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row tools-grid">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tool-card">
+                        <div class="tool-icon">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <h4>HTML</h4>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" data-aos="fade-up" data-aos-delay="150">
+                    <div class="tool-card">
+                        <div class="tool-icon">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <h4>CSS</h4>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tool-card">
+                        <div class="tool-icon">
+                            <i class="fab fa-js-square"></i>
+                        </div>
+                        <h4>JavaScript</h4>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" data-aos="fade-up" data-aos-delay="250">
+                    <div class="tool-card">
+                        <div class="tool-icon">
+                            <i class="fab fa-java"></i>
+                        </div>
+                        <h4>Java</h4>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="tool-card">
+                        <div class="tool-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h4>Python</h4>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" data-aos="fade-up" data-aos-delay="350">
+                    <div class="tool-card">
+                        <div class="tool-icon mysql-icon"></div>
+                        <h4>MySQL</h4>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="tool-card">
+                        <div class="tool-icon cpp-icon"></div>
+                        <h4>C++</h4>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" data-aos="fade-up" data-aos-delay="450">
+                    <div class="tool-card">
+                        <div class="tool-icon">
+                            <i class="devicon-c-plain colored"></i>
+                        </div>
+                        <h4>C</h4>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="tool-card">
+                        <div class="tool-icon excel-icon"></div>
+                        <h4>MS Excel</h4>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" data-aos="fade-up" data-aos-delay="550">
+                    <div class="tool-card">
+                        <div class="tool-icon">
+                            <i class="fab fa-git-alt"></i>
+                        </div>
+                        <h4>Git</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center" data-aos="fade-up">
+                    <h2 class="section-title">My Projects</h2>
+                    <p class="section-subtitle">
+                        Explore my latest work, blending creativity and code for functional, 
+                        responsive websites with clean design and seamless user experiences.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row projects-grid">
+                <!-- Project 1: UNO Multiplayer Game -->
+                <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/uno_image.jpg" alt="UNO Multiplayer Game" class="img-fluid">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">UNO Multiplayer Game</h3>
+                            <p class="project-description">
+                                A real-time multiplayer UNO game built with Node.js, Express.js, Socket.IO, and Vanilla JS, featuring 2–4 player rooms, UNO rules, smooth animations, and deployment on Render
+                            </p>
+                            <a href="https://uno-multiplayer-lbt9.onrender.com/" class="btn btn-explore" target="_blank">
+                                Explore <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Books Showcase -->
+                <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/show_case.png" alt="Books Showcase" class="img-fluid">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Books Showcase</h3>
+                            <p class="project-description">
+                                An interactive web app built with HTML, CSS, Bootstrap, and JS featuring flip-card book displays with detailed info pages. Deployed on GitHub Pages for easy access.
+                            </p>
+                            <a href="https://mohdirfan2509.github.io/ui-sem1-project/index.html" class="btn btn-explore" target="_blank">
+                                Explore <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Coming Soon -->
+                <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-card coming-soon">
+                        <div class="project-image">
+                            <div class="coming-soon-placeholder">
+                                <i class="fas fa-code"></i>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Coming Soon...</h3>
+                            <p class="project-description">
+                                Exciting new project in development. Stay tuned for more innovative solutions and creative implementations.
+                            </p>
+                            <button class="btn btn-explore disabled" disabled>
+                                Coming Soon <i class="fas fa-clock"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Coming Soon -->
+                <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="project-card coming-soon">
+                        <div class="project-image">
+                            <div class="coming-soon-placeholder">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Coming Soon...</h3>
+                            <p class="project-description">
+                                Another amazing project is on the way. Get ready for cutting-edge technology and exceptional user experience.
+                            </p>
+                            <button class="btn btn-explore disabled" disabled>
+                                Coming Soon <i class="fas fa-clock"></i>
+                            </button>
+                        </div>
+                    </div>
+              
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center" data-aos="fade-up">
+                    <h2 class="section-title">My Education</h2>
+                    <p class="section-subtitle">Academic journey and achievements</p>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-right">
+                    <a href="https://www.pwioi.com/technology/btech-computer-science-program?courseId=67fec08608f981d74c2e6197&_gl=1*2mqmzw*_gcl_au*Njk3NzQzNjc1LjE3NTc5NjIwMDE." target="_blank" class="timeline-link">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2024 - Present</div>
+                            <h3>PW Institute Of Innovation</h3>
+                            <h4>Bengaluru</h4>
+                            <h4>4-Year UG Pogramme</h4>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-left">
+                    <a href="https://study.iitm.ac.in/ds/" target="_blank" class="timeline-link">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2024 - Present</div>
+                            <h3>IIT Madras</h3>
+                            <h4>Chennai</h4>
+                            <h4>BS in Data Science & Applications</h4>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2021 - 2023</div>
+                        <h3>Govt. Junior College</h3>
+                        <h4>Cherial, Telangana</h4>
+                        <h4>12th Standard</h4>
+                        <h4>Percentage : 92.5%</h4>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020 - 2021</div>
+                        <h3>Presentation High School</h3>
+                        <h4>Cherial, Telangana</h4>
+                        <h4>10th Standard</h4>
+                        <h4>CGPA : 10/10</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center" data-aos="fade-up">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p class="section-subtitle">Ready to start your next project? Let's collaborate!</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <form class="contact-form" data-aos="fade-up" data-aos-delay="200">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Subject" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                Send Message <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="footer-brand">
+                        <div class="brand-logo">
+                            <div class="diamond"></div>
+                        </div>
+                        <span>Mohammad Irfan</span>
+                    </div>
+                    <p class="footer-text">Frontend Developer & Aspiring AI & ML Engineer</p>
+                </div>
+                
+                <div class="col-md-6 text-md-end">
+                    <div class="footer-social">
+                        <a href="https://github.com/mohdirfan2509" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/mohammad-irfan-638a2b308/" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:mohammadirfan25092004@gmail.com" class="social-link" target="_blank"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="footer-divider">
+            
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="footer-copyright">
+                        &copy; 2025 Mohammad Irfan. All rights reserved. Crafted with dedication and passion.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Typed.js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
