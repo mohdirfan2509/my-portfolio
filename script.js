@@ -10,9 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== INITIALIZE APPLICATION =====
 function initializeApp() {
-    // Initialize loader
-    initializeLoader();
-    
     // Initialize theme
     initializeTheme();
     
@@ -53,21 +50,6 @@ function initializeApp() {
     initializeClickDebugging();
 }
 
-// ===== LOADER =====
-function initializeLoader() {
-    const loader = document.getElementById('loader');
-    
-    // Hide loader after page is fully loaded
-    window.addEventListener('load', function() {
-        setTimeout(() => {
-            loader.classList.add('hidden');
-            // Remove loader from DOM after animation
-            setTimeout(() => {
-                loader.remove();
-            }, 500);
-        }, 1500);
-    });
-}
 
 // ===== THEME TOGGLE =====
 function initializeTheme() {
@@ -101,6 +83,8 @@ function initializeTheme() {
 function initializeNavbar() {
     const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
     
     // Navbar scroll effect
     window.addEventListener('scroll', function() {
@@ -125,6 +109,9 @@ function initializeNavbar() {
         });
     });
     
+    // Mobile navigation auto-close functionality
+    initializeMobileNavAutoClose();
+    
     function updateActiveNavLink() {
         const sections = document.querySelectorAll('section[id]');
         const scrollPos = window.scrollY + 100;
@@ -141,6 +128,70 @@ function initializeNavbar() {
             }
         });
     }
+}
+
+// ===== MOBILE NAVIGATION AUTO-CLOSE =====
+function initializeMobileNavAutoClose() {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    // Function to check if we're on mobile
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
+    
+    // Function to close mobile menu
+    function closeMobileMenu() {
+        if (isMobile() && navbarCollapse && navbarCollapse.classList.contains('show')) {
+            // Use Bootstrap's collapse method to close the menu
+            if (typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                    toggle: false
+                });
+                bsCollapse.hide();
+            } else {
+                // Fallback: manually close the menu
+                navbarCollapse.classList.remove('show');
+                if (navbarToggler) {
+                    navbarToggler.setAttribute('aria-expanded', 'false');
+                }
+            }
+        }
+    }
+    
+    // Close menu when clicking/touching outside (mobile only)
+    document.addEventListener('click', function(event) {
+        if (isMobile() && navbarCollapse && navbarCollapse.classList.contains('show')) {
+            const isClickInsideNav = navbarCollapse.contains(event.target) || 
+                                   (navbarToggler && navbarToggler.contains(event.target));
+            
+            if (!isClickInsideNav) {
+                closeMobileMenu();
+            }
+        }
+    });
+    
+    // Close menu when touching outside (for touch devices)
+    document.addEventListener('touchstart', function(event) {
+        if (isMobile() && navbarCollapse && navbarCollapse.classList.contains('show')) {
+            const isTouchInsideNav = navbarCollapse.contains(event.target) || 
+                                    (navbarToggler && navbarToggler.contains(event.target));
+            
+            if (!isTouchInsideNav) {
+                closeMobileMenu();
+            }
+        }
+    });
+    
+    // Handle window resize to ensure functionality works correctly
+    window.addEventListener('resize', function() {
+        // If resizing from mobile to desktop, ensure menu is closed
+        if (!isMobile() && navbarCollapse && navbarCollapse.classList.contains('show')) {
+            closeMobileMenu();
+        }
+    });
+    
 }
 
 // ===== SMOOTH SCROLLING =====
@@ -167,6 +218,27 @@ function initializeSmoothScrolling() {
                     top: offsetTop,
                     behavior: 'smooth'
                 });
+                
+                // Trigger mobile menu close after navigation (mobile only)
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        const navbarCollapse = document.querySelector('.navbar-collapse');
+                        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                            if (typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+                                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                                    toggle: false
+                                });
+                                bsCollapse.hide();
+                            } else {
+                                navbarCollapse.classList.remove('show');
+                                const navbarToggler = document.querySelector('.navbar-toggler');
+                                if (navbarToggler) {
+                                    navbarToggler.setAttribute('aria-expanded', 'false');
+                                }
+                            }
+                        }
+                    }, 200);
+                }
             }
         });
     });
@@ -230,13 +302,16 @@ function initializeCounters() {
         const increment = target / (duration / 16);
         let current = 0;
         
+        // Check if this is the hackathons counter (no + symbol)
+        const isHackathonsCounter = counter.closest('.stat-item').querySelector('.stat-label').textContent.includes('Hackathons Participated');
+        
         const updateCounter = () => {
             current += increment;
             if (current < target) {
-                counter.textContent = Math.floor(current) + '+';
+                counter.textContent = Math.floor(current) + (isHackathonsCounter ? '' : '+');
                 requestAnimationFrame(updateCounter);
             } else {
-                counter.textContent = target + '+';
+                counter.textContent = target + (isHackathonsCounter ? '' : '+');
             }
         };
         
@@ -339,6 +414,9 @@ function initializeFormHandling() {
     const contactForm = document.querySelector('.contact-form');
     
     if (contactForm) {
+        // Initialize EmailJS
+        emailjs.init('DVLSwlOajGqQjUXiz');; // Replace with your actual public key
+        
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -347,22 +425,43 @@ function initializeFormHandling() {
             const submitBtn = this.querySelector('.btn-submit');
             const originalText = submitBtn.innerHTML;
             
+            // Validate form
+            if (!validateForm(this)) {
+                return;
+            }
+            
             // Show loading state
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
             
-            // Simulate form submission
-            setTimeout(() => {
-                // Show success message
-                showNotification('Message sent successfully!', 'success');
-                
-                // Reset form
-                this.reset();
-                
-                // Reset button
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
+            // Prepare email parameters
+            const emailParams = {
+                from_name: formData.get('name') || this.querySelector('input[placeholder*="Name"]').value,
+                from_email: formData.get('email') || this.querySelector('input[placeholder*="Email"]').value,
+                subject: formData.get('subject') || this.querySelector('input[placeholder*="Subject"]').value,
+                message: formData.get('message') || this.querySelector('textarea[placeholder*="Message"]').value
+            };
+            
+            // Send email using EmailJS
+            emailjs.send('service_whgt0uj', 'template_gaaakxc', emailParams) // Replace with your actual IDs
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+                    
+                    // Reset form
+                    contactForm.reset();
+                    
+                    // Reset button
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    showNotification('Sorry, there was an error sending your message. Please try again or contact me directly.', 'error');
+                    
+                    // Reset button
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
         });
         
         // Form input focus effects
@@ -379,6 +478,84 @@ function initializeFormHandling() {
             });
         });
     }
+}
+
+// ===== FORM VALIDATION =====
+function validateForm(form) {
+    const nameInput = form.querySelector('input[placeholder*="Name"]');
+    const emailInput = form.querySelector('input[placeholder*="Email"]');
+    const subjectInput = form.querySelector('input[placeholder*="Subject"]');
+    const messageInput = form.querySelector('textarea[placeholder*="Message"]');
+    
+    let isValid = true;
+    
+    // Clear previous error states
+    clearFormErrors(form);
+    
+    // Validate name
+    if (!nameInput.value.trim()) {
+        showFieldError(nameInput, 'Name is required');
+        isValid = false;
+    }
+    
+    // Validate email
+    if (!emailInput.value.trim()) {
+        showFieldError(emailInput, 'Email is required');
+        isValid = false;
+    } else if (!isValidEmail(emailInput.value)) {
+        showFieldError(emailInput, 'Please enter a valid email address');
+        isValid = false;
+    }
+    
+    // Validate subject
+    if (!subjectInput.value.trim()) {
+        showFieldError(subjectInput, 'Subject is required');
+        isValid = false;
+    }
+    
+    // Validate message
+    if (!messageInput.value.trim()) {
+        showFieldError(messageInput, 'Message is required');
+        isValid = false;
+    } else if (messageInput.value.trim().length < 10) {
+        showFieldError(messageInput, 'Message must be at least 10 characters long');
+        isValid = false;
+    }
+    
+    return isValid;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function showFieldError(input, message) {
+    const parent = input.parentElement;
+    parent.classList.add('error');
+    
+    // Remove existing error message
+    const existingError = parent.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+    
+    // Add error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    parent.appendChild(errorDiv);
+}
+
+function clearFormErrors(form) {
+    const errorFields = form.querySelectorAll('.error');
+    errorFields.forEach(field => {
+        field.classList.remove('error');
+        const errorMessage = field.querySelector('.error-message');
+        if (errorMessage) {
+            errorMessage.remove();
+        }
+    });
 }
 
 // ===== PROJECTS MODALS =====
@@ -489,25 +666,20 @@ function initializeAOS() {
 
 // ===== CLICK DEBUGGING =====
 function initializeClickDebugging() {
-    // Force contact button to work
+    // Log contact button clicks for debugging
     const contactBtn = document.querySelector('.btn-contact');
     if (contactBtn) {
         contactBtn.addEventListener('click', function(e) {
-            console.log('Contact button clicked!', e);
-            // Force open email client
-            window.location.href = 'mailto:mohammadirfan25092004@gmail.com';
+            console.log('Contact button clicked (mailto will trigger).');
         });
     }
     
-    // Force social links to work
+    // Log social link clicks for debugging
     const socialLinks = document.querySelectorAll('.social-link');
     socialLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            console.log('Social link clicked!', this.href, e);
-            // Force open link
-            if (this.href) {
-                window.open(this.href, '_blank');
-            }
+            console.log('Social link clicked:', this.href);
+            // Let native <a> handle navigation
         });
     });
 }
@@ -609,11 +781,13 @@ const additionalStyles = `
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease-in-out;
+        pointer-events: none;
     }
     
     .projects-modal-overlay.show {
         opacity: 1;
         visibility: visible;
+        pointer-events: auto;
     }
     
     .projects-modal {
@@ -766,10 +940,47 @@ const styleSheet = document.createElement('style');
 styleSheet.textContent = additionalStyles;
 document.head.appendChild(styleSheet);
 
+// ===== CONTACT LINK HANDLING =====
+function handleContactClick(event) {
+    event.preventDefault();
+    
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isChrome = userAgent.includes('chrome') && !userAgent.includes('edg');
+    const isFirefox = userAgent.includes('firefox');
+    const isSafari = userAgent.includes('safari') && !userAgent.includes('chrome');
+    const isEdge = userAgent.includes('edg');
+    
+    const email = 'mohammadirfan25092004@gmail.com';
+    const subject = 'Portfolio Inquiry';
+    const body = 'Hi Mohammad,\n\nI came across your portfolio and would like to connect with you.\n\nBest regards,';
+    
+    // Try to detect if Gmail app is available
+    const gmailAppUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    if (isChrome) {
+        // For Chrome, try Gmail web interface first
+        window.open(gmailAppUrl, '_blank');
+    } else if (isFirefox) {
+        // For Firefox, use Gmail web interface
+        window.open(gmailAppUrl, '_blank');
+    } else if (isSafari) {
+        // For Safari, try Gmail web interface
+        window.open(gmailAppUrl, '_blank');
+    } else if (isEdge) {
+        // For Edge, use Gmail web interface
+        window.open(gmailAppUrl, '_blank');
+    } else {
+        // Fallback to mailto for other browsers
+        const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoUrl;
+    }
+}
+
 // ===== EXPORT FUNCTIONS FOR GLOBAL ACCESS =====
 window.ProjectsApp = {
     showNotification,
     showProjectsModal,
+    handleContactClick,
     setTheme: (theme) => {
         currentTheme = theme;
         document.body.setAttribute('data-theme', theme);
